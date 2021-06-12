@@ -27,11 +27,16 @@ def predict():
 
 @app.route('/predict_api', methods=['POST'])
 def predict_api():
-    # For direct API calls trought request
     data = request.get_json(force=True)
-    prediction = model.predict([np.array(list(data.values()))])
-    return jsonify(model_result[prediction])
+    input_df  = pd.DataFrame.from_dict(data['data'])
+    prediction = model.predict(input_df.values)
+
+
+    #model_result[prediction[0]]
+
+    return  jsonify( {'output' :  model_result[prediction[0]]})
+
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host = '0.0.0.0', port ='3000')
