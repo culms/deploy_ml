@@ -6,6 +6,5 @@ COPY . /app
 
 RUN pip install -r requirement.txt
 
-ENTRYPOINT ["python"]
-
-CMD ["app.py"]
+EXPOSE 8000
+ENTRYPOINT ["sh","to_run.sh"]
